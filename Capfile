@@ -6,7 +6,7 @@ require 'capistrano/setup'
 require 'capistrano/deploy'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'capistrano/secrets_yml'
+#require 'capistrano/secrets_yml'
 require 'capistrano/rake'
 
 

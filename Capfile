@@ -5,7 +5,6 @@ require 'capistrano/setup'
 # Include default deployment tasks
 require 'capistrano/deploy'
 require 'capistrano/bundler'
-require 'rvm1/capistrano3'
 require 'capistrano/rails'
 require 'capistrano/secrets_yml'
 require 'capistrano/rake'
@@ -18,6 +17,10 @@ require 'capistrano/rake'
 
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
+
+require 'capistrano/rbenv'
+set :rbenv_ruby, '2.5.3'
+set :rbenv_type, :user
 
 # Include tasks from other gems included in your Gemfile
 #

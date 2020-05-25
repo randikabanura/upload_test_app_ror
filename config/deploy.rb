@@ -10,7 +10,7 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 #
 set :pty, true
 
-#set :linked_files, %w(config/database.yml config/secrets.yml config/keys/x509/samidp_private_epicbusiness.pem config/keys/x509/samidp_private_ceacopilot_org.pem)
+set :linked_files, %w(config/secrets.yml)
 #set :linked_dirs,  %w(bin tmp/pids tmp/cache tmp/sockets vendor/bundle public/system)
 # set :linked_dirs, %w(bin log tmp)
 # Default value for :linked_files is []

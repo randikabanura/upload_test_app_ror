@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts
-
-  root 'posts#index'
+  root 'welcome#index'
   namespace 'v1', defaults: { format: :json } do
     get '/upload/init' => 'large_file_upload#initialize_upload'
     post '/upload' => 'large_file_upload#upload'

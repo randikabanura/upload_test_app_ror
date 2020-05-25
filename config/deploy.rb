@@ -3,7 +3,7 @@
 
 set :application, 'upload_test_app_ror'
 set :repo_url, 'git@github.com:randikabanura/upload_test_app_ror.git'
-set :stages, ["test"]
+set :stages, ["production"]
 # Default branch is :master
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

@@ -65,4 +65,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'fi_largefileupload' , git: "git@bitbucket.org:fidenz/fi_largefileupload_ror.git", branch: 'feature/FZLFU-3-intial-uploader'
+gem 'fi_largefileupload' , git: "git@bitbucket.org:fidenz/fi_largefileupload_ror.git", branch: 'develop'

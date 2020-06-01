@@ -1,7 +1,7 @@
 GIT
   remote: git@bitbucket.org:fidenz/fi_largefileupload_ror.git
-  revision: 2d77bb94c32619f3971464f78af42adef82a8f3c
-  branch: feature/FZLFU-3-intial-uploader
+  revision: 11c4d2fb3f9da65deeeb35f4846a2839aefaa731
+  branch: develop
   specs:
     fi_largefileupload (0.1.0)
       jbuilder (~> 2.10)

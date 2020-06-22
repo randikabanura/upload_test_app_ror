@@ -43,8 +43,8 @@
     let btnUpload = document.getElementById("btnUpload");
     let btnRestartUpload = document.getElementById("restartUpload");
     let fileInput = document.getElementById("inputFile");
-    let serverIp = 'http://54.145.169.34';
-    let baseUrl = serverIp + ":8080/v1"
+    let serverIp = 'http://54.145.169.34:8080';
+    let baseUrl = serverIp + "/v1"
 
     fileInput.onload = configUploader();
     var fileUploader;

@@ -8,7 +8,7 @@
 # server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 set :rails_env, :production
-server '54.172.229.63', user: 'deploy', roles: %w(web app db)
+server '54.145.169.34', user: 'deploy', roles: %w(web app db)
 set :ssh_options, keys: ['~/.ssh/lfu_deploy.txt']
 set :deploy_to, '/var/www/fi_largefileupload_ror'
 

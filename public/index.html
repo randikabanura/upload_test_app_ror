@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="./styles/style.css" />
+
+  <title></title>
+  <meta charset="UTF-8" />
+</head>
+
+<body>
+  <!-- File Picker -->
+  <div class="file-uploader">
+    <div id="uploadStatus">
+      <h4 id='uploadStatusHeader'>- Ready to Upload -</h4>
+      <p id='uploadStatusContent'></p>
+    </div>
+    <form role="form" class="form-file-upload">
+      <div class="">
+        <input type="file" class="input-file" id="inputFile">
+      </div>
+      <input type="button" value="Upload" id="btnUpload">
+    </form>
+    <hr />
+    <ul id="file_log" style="list-style: none;">
+    </ul>
+    <form role="form" style="display:none" class="form-file-upload">
+      <div class="" id="uncompleteUploadsWrapper">
+      </div>
+      <input type="button" value="Check Restart Capability" id="restartUpload">
+    </form>
+  </div>
+  <!-- Local JS -->
+  <script type="module">
+    import Uploader from '../src/scripts/script.js';
+
+    let uploadStatusHeader = document.getElementById("uploadStatusHeader");
+    let uploadStatusContent = document.getElementById("uploadStatusContent");
+    let btnUpload = document.getElementById("btnUpload");
+    let btnRestartUpload = document.getElementById("restartUpload");
+    let fileInput = document.getElementById("inputFile");
+    let serverIp = 'http://54.145.169.34';
+    let baseUrl = serverIp + ":8080/v1"
+
+    fileInput.onload = configUploader();
+    var fileUploader;
+    var uncompleteUploads = [];
+    var sampleID = "";
+
+    function uploadStatusMsg(message) {
+      uploadStatusHeader.innerHTML = message["header"];
+      uploadStatusContent.innerHTML = message["content"];
+      refreshLog();
+    }
+
+    function configUploader() {
+      fileUploader = new Uploader();
+      fileUploader.config({
+        baseURL: baseUrl,
+        client: "Web",
+        maxConcurrentUploads: 4,
+        uploadStatusMsg: uploadStatusMsg,
+      });
+    }
+
+    fileInput.onchange = function () {
+      var selectedFile = fileInput.files.item(0);
+      console.log(sampleID)
+      if (sampleID === "") {
+        fileUploader.initUpload(selectedFile);
+      } else {
+        fileUploader.restartUpload(selectedFile);
+      }
+    }
+
+    btnUpload.onclick = function () {
+      fileUploader.startUpload();
+    }
+
+    btnRestartUpload.onclick = function () {
+      fileInput.value = "";
+      uncompleteUploads = fileUploader.checkLocalUncompleteUploads();
+      //Programatically select the most recent uncomplete upload
+      sampleID = uncompleteUploads[0].uploadId;
+      fileUploader.checkRemoteUncompleteUploads(sampleID);
+    }
+    function refreshLog() {
+      var req = new XMLHttpRequest();
+      req.responseType = 'json';
+      req.open('GET', serverIp+'/filelist', true);
+      req.onload = function () {
+        if (req.response) {
+          console.log(req.response);
+          /// var jsonResponse = JSON.parse(req.response);
+          let i = 0;
+          var ulist = document.getElementById("file_log");
+          ulist.innerHTML = "";
+          for (i = 0; i < req.response.length; i++) {
+            let linkText = req.response[i]
+            var a = document.createElement("a");
+            var newItem = document.createElement("li");
+            a.textContent = linkText;
+            a.setAttribute('href', serverIp+"/download" + "?file_id=" + linkText);
+            a.setAttribute('target', '_blank');
+            newItem.appendChild(a);
+            ulist.appendChild(newItem);
+          }
+        }
+      };
+      req.send(null);
+    }
+  </script>
+</body>
+
+</html>

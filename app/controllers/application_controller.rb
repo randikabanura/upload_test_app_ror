@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :maintainance_message_redirection
+  #before_action  :maintainance_message_redirection
 
   def maintainance_message_redirection
   # unless allowed_ips.any? { |block| block.include?(request.remote_ip) }
